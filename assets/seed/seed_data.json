@@ -1,0 +1,133 @@
+{
+  "business_plans": [
+    {
+      "plan_id": 2,
+      "plan_token": "CH-DSEJRZ1WYESC7BE4FT",
+      "plan_name": "Kirinda Grain Guard",
+      "resource_name": "Umuravumba",
+      "price_range": "Below 500,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "01_kirinda_grain_guard_umuravumba.pdf",
+      "cover_photo_name": "ChatGPT Image Sep 22, 2026, 12_22_17 PM.png",
+      "plan_type": "FREE",
+      "download_count": 0
+    },
+    {
+      "plan_id": 3,
+      "plan_token": "CH-DNVLOJ5W8WJVSI89MN",
+      "plan_name": "Fresha Route",
+      "resource_name": "Umwenya",
+      "price_range": "Below 500,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "02_fresha_route_umwenya_lemongrass.pdf",
+      "cover_photo_name": "fresh route.png",
+      "plan_type": "FREE",
+      "download_count": 0
+    },
+    {
+      "plan_id": 4,
+      "plan_token": "CH-I6YLDA41LS837G0EBM",
+      "plan_name": "Terra Twine",
+      "resource_name": "Sisal",
+      "price_range": "Below 500,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "03_terra_twine_sisal_agri_input.pdf",
+      "cover_photo_name": "terra wine.png",
+      "plan_type": "FREE",
+      "download_count": 0
+    },
+    {
+      "plan_id": 5,
+      "plan_token": "CH-BVWF4STFMAIPJ1QQI0",
+      "plan_name": "Cascara Circle",
+      "resource_name": "Coffee",
+      "price_range": "Above 5,000,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "04_cascara_circle_coffee_byproduct.pdf",
+      "cover_photo_name": "cascara circle.png",
+      "plan_type": "PREMIUM",
+      "download_count": 0
+    },
+    {
+      "plan_id": 6,
+      "plan_token": "CH-QEJ5JENGZJTWHYIM64",
+      "plan_name": "Second Flush Spa Co.",
+      "resource_name": "Tea",
+      "price_range": "Above 5,000,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "05_second_flush_spa_tea_byproduct.pdf",
+      "cover_photo_name": "second flush.png",
+      "plan_type": "PREMIUM",
+      "download_count": 0
+    },
+    {
+      "plan_id": 7,
+      "plan_token": "CH-Z4NQTJR7B84SOZ40HO",
+      "plan_name": "Fibra Panel",
+      "resource_name": "Sisal",
+      "price_range": "Above 5,000,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "",
+      "pdf_file_name": "06_fibra_panel_sisal_composite.pdf",
+      "cover_photo_name": "fibra panel.png",
+      "plan_type": "PREMIUM",
+      "download_count": 0
+    },
+    {
+      "plan_id": 8,
+      "plan_token": "CH-B5W4S34VPYI5PHBODB",
+      "plan_name": "Bwiza Jewels",
+      "resource_name": "Bamboo / Umwenya",
+      "price_range": "Below 500,000 RWF",
+      "city": "Kigali",
+      "youtube_url": "https://youtu.be/8L4CBRZHB9A",
+      "pdf_file_name": "bwiza_jewel.pdf",
+      "cover_photo_name": "bwiza.jpeg",
+      "plan_type": "FREE",
+      "download_count": 0
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": 1,
+      "resource_name": "Umuravumba",
+      "description": "Natural resource business opportunity",
+      "active": 1
+    },
+    {
+      "resource_id": 2,
+      "resource_name": "Umwenya",
+      "description": "Natural resource business opportunity",
+      "active": 1
+    },
+    {
+      "resource_id": 3,
+      "resource_name": "Sisal",
+      "description": "Natural resource business opportunity",
+      "active": 1
+    },
+    {
+      "resource_id": 4,
+      "resource_name": "Coffee",
+      "description": "Natural resource business opportunity",
+      "active": 1
+    },
+    {
+      "resource_id": 5,
+      "resource_name": "Tea",
+      "description": "Natural resource business opportunity",
+      "active": 1
+    },
+    {
+      "resource_id": 6,
+      "resource_name": "Pyrethrum & Urubingo",
+      "description": "Natural insecticide and artisan craft material.",
+      "active": 1
+    }
+  ]
+}
