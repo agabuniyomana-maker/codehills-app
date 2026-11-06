@@ -5,6 +5,7 @@ import 'features/admin/admin_screen.dart';
 import 'features/articles/articles_screen.dart';
 import 'features/catalog/catalog_screen.dart';
 import 'features/contact/contact_screen.dart';
+import 'features/marketplace/marketplace_screen.dart';
 import 'features/stats/stats_screen.dart';
 import 'features/water_products/water_products_screen.dart';
 
@@ -54,6 +55,14 @@ final List<AppFeature> appFeatures = [
     icon: Icons.info_outline,
     builder: (_) => const AboutScreen(),
     probeText: 'ready-to-use ventures',
+  ),
+  AppFeature(
+    id: 'marketplace',
+    label: 'MARKETPLACE',
+    phoneLabel: 'SHOP',
+    icon: Icons.storefront_outlined,
+    builder: (_) => const MarketplaceScreen(),
+    probeText: 'Marketplace',
   ),
   AppFeature(
     id: 'catalog',
