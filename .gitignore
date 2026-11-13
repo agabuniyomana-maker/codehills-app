@@ -9,6 +9,12 @@ build/
 .idea/
 *.iml.bak
 
+# Backend keys (copy dart_defines.example.json to dart_defines.json), never commit
+dart_defines.json
+.env
+.env.*
+!.env.example
+
 # Android release secrets — the upload keystore must never be committed
 android/key.properties
 *.jks
