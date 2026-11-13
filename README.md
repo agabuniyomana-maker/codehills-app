@@ -23,11 +23,14 @@ dark brown `#372314`.
 All 7 business plans, 6 natural resources, the 7 PDFs and cover images from
 the original database are bundled as assets.
 
-## Demo credentials (local mode — no backend)
+## Demo credentials (debug builds without a backend only)
 
 - **User:** register a new account from the Sign Up screen.
 - **Admin:** username `admin`, password `codehills1001`
-  (change in `lib/services/auth_service.dart` before release).
+
+These work only when `AuthService.demoModeAvailable` is true — a **debug**
+build with no Supabase keys. Release builds refuse local accounts entirely, so
+real accounts must come from Supabase Auth.
 
 ## Backend (optional, Supabase)
 
@@ -53,6 +56,18 @@ flutter run -d chrome        # web preview
 flutter run -d windows       # Windows desktop
 flutter build apk            # Android installer for the Play Store
 ```
+
+## My Imigongo identity
+
+Every account gets a permanent, deterministic Imigongo pattern derived from
+its stable account id (`auth.users.id`, or a generated local account id) — see
+`lib/services/imigongo_identity.dart`. The pattern is pure artwork: the same
+account sees the same composition after logout/login, on another device or
+after reinstalling, renaming the account never changes it, and it is never
+used for authentication or password handling. It is shown in the header bar
+(`lib/features/home/home_shell.dart`) with the accessible label "Your Imigongo
+identity" and a short code (`IMI-ABC-DEF`) so identities do not rely on colour
+alone.
 
 ## Phase 2 (next)
 

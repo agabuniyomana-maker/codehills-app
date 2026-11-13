@@ -62,7 +62,7 @@ final List<AppFeature> appFeatures = [
     phoneLabel: 'SHOP',
     icon: Icons.storefront_outlined,
     builder: (_) => const MarketplaceScreen(),
-    probeText: 'Marketplace',
+    probeText: 'MARKETPLACE',
   ),
   AppFeature(
     id: 'catalog',
@@ -110,9 +110,10 @@ final List<AppFeature> appFeatures = [
     phoneLabel: 'ADMIN',
     icon: Icons.admin_panel_settings_outlined,
     builder: (_) => const AdminScreen(),
-    probeText: 'Demo admin: admin / codehills1001',
+    probeText: 'ADMIN LOGIN',
   ),
 ];
 
 /// Index of the feature the app opens on (the catalog, like the old portal).
-const int initialFeatureIndex = 1;
+/// Keep this in step with the list above: 'catalog' is index 2.
+const int initialFeatureIndex = 2;

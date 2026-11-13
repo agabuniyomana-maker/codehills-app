@@ -199,11 +199,24 @@ class _AdminLoginGateState extends State<_AdminLoginGate> {
                 const SizedBox(height: 20),
                 PortalButton(label: 'ENTER ADMIN PORTAL', onPressed: _login),
                 const SizedBox(height: 14),
-                const Text(
-                  'Demo admin: admin / codehills1001',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12, color: AppColors.mutedBrown),
-                ),
+                // Demo credentials are only shown by debug builds without a
+                // backend (see AuthService.demoModeAvailable); release builds
+                // must sign in through the project backend.
+                if (AuthService.instance.demoModeAvailable)
+                  const Text(
+                    'Demo admin: admin / codehills1001',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 12, color: AppColors.mutedBrown),
+                  )
+                else
+                  const Text(
+                    'Sign in with an administrator account. Administrator '
+                    'rights are granted by the portal owner, never in the app.',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 12, color: AppColors.mutedBrown),
+                  ),
               ],
             ),
           ),

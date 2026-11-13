@@ -10,7 +10,9 @@ lib/
   main.dart                  entry point (loads data + auth, then home)
   app_features.dart          ★ THE feature registry — start here
   theme/app_theme.dart       brand colors (gold/cream/dark brown) + styles
-  widgets/portal_widgets.dart shared UI: PortalCard, PortalHeading, ImigongoBand…
+  widgets/portal_widgets.dart shared UI: PortalCard, PortalHeading, ImigongoBand,
+                             ImigongoIdentityBadge (account pattern)…
+  services/imigongo_identity.dart  stable account-derived Imigongo pattern
   models/models.dart         data types (BusinessPlan, ResourceCategory, PlanComment)
   data/app_data.dart         data store — currently seeded JSON, Supabase in phase 2
   services/auth_service.dart login/register — local now, Supabase Auth later
@@ -75,7 +77,10 @@ flutter build apk                          # Android installer
 The app has **two modes**, picked at build time by `services/backend_config.dart`:
 
 * **Local mode (default)** — everything in SharedPreferences; seeded admin
-  `admin / codehills1001`. Used by tests, demos and any build without keys.
+  `admin / codehills1001` in **debug builds only**. Used by tests, demos and
+  any debug build without keys. Release builds refuse local accounts, so a
+  release without Supabase keys has no sign-in rather than plain-text
+  credentials.
 * **Supabase mode** — real accounts (Supabase Auth) and shared comments /
   inquiries / partner requests (Postgres). Enabled by passing keys:
 

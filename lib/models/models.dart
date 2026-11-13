@@ -107,12 +107,18 @@ class PlanComment {
   final String text;
   final DateTime createdAt;
 
+  /// True when the comment is only stored on this device because the server
+  /// write failed. Pending comments are retried on the next load and the UI
+  /// says so instead of claiming the comment was shared.
+  final bool pending;
+
   const PlanComment({
     required this.id,
     required this.planId,
     required this.username,
     required this.text,
     required this.createdAt,
+    this.pending = false,
   });
 
   factory PlanComment.fromJson(Map<String, dynamic> json) => PlanComment(
@@ -121,6 +127,16 @@ class PlanComment {
         username: json['username'] as String,
         text: json['comment_text'] as String,
         createdAt: DateTime.parse(json['created_at'] as String),
+        pending: json['pending'] as bool? ?? false,
+      );
+
+  PlanComment copyWith({int? id, bool? pending}) => PlanComment(
+        id: id ?? this.id,
+        planId: planId,
+        username: username,
+        text: text,
+        createdAt: createdAt,
+        pending: pending ?? this.pending,
       );
 
   Map<String, dynamic> toJson() => {
@@ -129,6 +145,7 @@ class PlanComment {
         'username': username,
         'comment_text': text,
         'created_at': createdAt.toIso8601String(),
+        if (pending) 'pending': true,
       };
 }
 

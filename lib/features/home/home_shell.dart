@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app_features.dart';
 import '../../services/auth_service.dart';
+import '../../services/imigongo_identity.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/portal_widgets.dart';
 import '../auth/login_screen.dart';
@@ -47,6 +48,8 @@ class _HomeShellState extends State<HomeShell> {
       body: Column(
         children: [
           const AppHeader(),
+          if (user != null)
+            _IdentityBar(session: user, onLogout: _logout),
           Expanded(
             child: wide
                 ? Row(
@@ -93,7 +96,7 @@ class _HomeShellState extends State<HomeShell> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ImigongoAvatar(
-                                    seed: user?.username ?? 'guest',
+                                    seed: user?.accountId ?? 'guest',
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
@@ -141,6 +144,85 @@ class _HomeShellState extends State<HomeShell> {
                   ),
               ],
             ),
+    );
+  }
+}
+
+/// The account's permanent Imigongo identity, shown after login.
+///
+/// Everything here comes from the stable account id — never the display name
+/// — so the artwork survives logout/login, reinstalls and other devices. On
+/// phones this bar is also the sign-out control, since the navigation rail
+/// (and its logout button) is hidden there.
+class _IdentityBar extends StatelessWidget {
+  const _IdentityBar({required this.session, required this.onLogout});
+
+  final Session session;
+  final Future<void> Function() onLogout;
+
+  @override
+  Widget build(BuildContext context) {
+    final identity = ImigongoIdentity.forAccount(session.accountId);
+    return Container(
+      color: AppColors.cream,
+      padding: const EdgeInsets.fromLTRB(14, 8, 8, 8),
+      child: Row(
+        children: [
+          ImigongoIdentityBadge(identity: identity, size: 44),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'YOUR IMIGONGO IDENTITY',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.1,
+                    color: AppColors.mutedBrown,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '${session.username} · ${identity.code}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.darkBrown,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (session.isAdmin)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(
+                color: AppColors.darkBrown,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Text(
+                'ADMIN',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1,
+                  color: AppColors.yellow,
+                ),
+              ),
+            ),
+          IconButton(
+            tooltip: 'Log out',
+            onPressed: onLogout,
+            icon: const Icon(Icons.logout, size: 20),
+            color: AppColors.darkBrown,
+          ),
+        ],
+      ),
     );
   }
 }

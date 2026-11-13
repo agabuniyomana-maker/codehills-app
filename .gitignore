@@ -1,2 +1,16 @@
 config.bat
 node_modules
+
+# Flutter / Dart build output
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+.idea/
+*.iml.bak
+
+# Android release secrets — the upload keystore must never be committed
+android/key.properties
+*.jks
+*.keystore
+local.properties

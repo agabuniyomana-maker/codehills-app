@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../data/app_data.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/portal_widgets.dart';
 
@@ -269,7 +270,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
           )
           .join('\n');
 
-      await AppData.instance.addInquiry({
+      final status = await AppData.instance.addInquiry({
         'name': nameController.text.trim(),
         'email': contactController.text.trim(),
         'inquiry': 'Marketplace order request:\n$orderLines\n'
@@ -280,8 +281,13 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
       if (!mounted) return;
       setState(() => _cart.clear());
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Order request sent. The seller can follow up with you.'),
+        SnackBar(
+          content: Text(
+            status == SaveStatus.sent
+                ? 'Order request sent. The seller can follow up with you.'
+                : 'Order request saved on this device. It will be sent when '
+                    'you are back online.',
+          ),
           backgroundColor: AppColors.darkBrown,
         ),
       );
@@ -439,7 +445,7 @@ class _ProductCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    color: product.color.withOpacity(0.18),
+                    color: product.color.withValues(alpha: 0.18),
                     child: Icon(product.icon, size: 68, color: product.color),
                   ),
                   Positioned(

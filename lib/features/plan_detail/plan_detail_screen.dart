@@ -49,7 +49,7 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
     final text = _commentController.text.trim();
     final user = AuthService.instance.session?.username;
     if (text.isEmpty || user == null) return;
-    await AppData.instance.addComment(
+    final status = await AppData.instance.addComment(
       PlanComment(
         id: AppData.instance.nextCommentId(),
         planId: widget.plan.planId,
@@ -59,7 +59,14 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
       ),
     );
     _commentController.clear();
+    if (!mounted) return;
     setState(() {});
+    if (status == SaveStatus.savedOnDevice) {
+      _showMessage(
+        'Comment saved on this device. It will be shared when you are back '
+        'online.',
+      );
+    }
   }
 
   void _partnerRequest() {
@@ -82,7 +89,7 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
           ElevatedButton(
             onPressed: () async {
               Navigator.of(context).pop();
-              await AppData.instance.addPartnerRequest({
+              final status = await AppData.instance.addPartnerRequest({
                 'plan_id': widget.plan.planId,
                 'plan_name': widget.plan.planName,
                 'username': user,
@@ -90,7 +97,11 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
               });
               if (!mounted) return;
               _showMessage(
-                'Partnership request sent for "${widget.plan.planName}".',
+                status == SaveStatus.sent
+                    ? 'Partnership request sent for '
+                        '"${widget.plan.planName}".'
+                    : 'Request saved on this device and will be sent when '
+                        'you are back online.',
               );
             },
             child: const Text('SEND REQUEST'),
@@ -238,7 +249,9 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
         padding: const EdgeInsets.all(12),
         child: Row(
           children: [
-            ImigongoAvatar(seed: user),
+            ImigongoAvatar(
+              seed: AuthService.instance.session?.accountId ?? user,
+            ),
             const SizedBox(width: 10),
             Expanded(
               child: TextField(
@@ -285,6 +298,15 @@ class _PlanDetailScreenState extends State<PlanDetailScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(c.text, style: const TextStyle(fontSize: 14)),
+                  if (c.pending)
+                    const Text(
+                      'Saved on this device — not shared yet',
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontStyle: FontStyle.italic,
+                        color: AppColors.mutedBrown,
+                      ),
+                    ),
                   const SizedBox(height: 4),
                   Text(
                     _formatDate(c.createdAt),

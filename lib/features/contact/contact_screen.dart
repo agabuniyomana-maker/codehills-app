@@ -36,7 +36,7 @@ class _ContactScreenState extends State<ContactScreen> {
       );
       return;
     }
-    await AppData.instance.addInquiry({
+    final status = await AppData.instance.addInquiry({
       'name': _nameController.text.trim(),
       'email': _emailController.text.trim(),
       'inquiry': _inquiryController.text.trim(),
@@ -47,8 +47,13 @@ class _ContactScreenState extends State<ContactScreen> {
     _inquiryController.clear();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Thank you! Your inquiry has been recorded.'),
+      SnackBar(
+        content: Text(
+          status == SaveStatus.sent
+              ? 'Thank you! Your inquiry has been recorded.'
+              : 'Saved on this device. It will be sent to the Code Hills team '
+                  'when you are back online.',
+        ),
         backgroundColor: AppColors.darkBrown,
       ),
     );
